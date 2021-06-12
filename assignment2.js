@@ -125,17 +125,70 @@ arr.forEach((x) => console.log(x));
 // console.log(array1.myReduce(reducer, 5));
 // // expected output: 15
 
-/*
-// INCLUDES //
-Array.prototype.myIncludes = function() {
 
-};
+// INCLUDES //  --> test more
+// Array.prototype.myIncludes = function(searchElement, fromIndex) {
+//     let startpoint = 0;
+//     let bool = false;
+//     (fromIndex !== undefined) ? startpoint=fromIndex : 0;
+//     for(let i =startpoint; i < this.length; i++) {
+//         if(this[i] === searchElement) {
+//             bool = true;
+//             break;
+//         }        
+//     }
+//     return bool;
+// };
 
-// INDEXOF //
-Array.prototype.myIndexOf = function() {
+// const array1 = [1, 2, 3];
 
-};
-*/
+// console.log(array1.myIncludes(2));
+// // expected output: true
+
+// const pets = ['cat', 'dog', 'bat'];
+
+// console.log(pets.myIncludes('cat'));
+// // expected output: true
+
+// console.log(pets.myIncludes('at'));
+// // expected output: false
+
+
+// INDEXOF // --> more test needed
+// Array.prototype.myIndexOf = function(searchElement, fromIndex) {
+//     let index = -1;
+//     let start = 0;
+//     if(fromIndex >= this.length) {
+//         return -1;
+//     }
+//     if(fromIndex < 0) {    //not sure about this part
+//         start = this.length + fromIndex;
+//     }
+//     if(fromIndex !== undefined) {
+//         start = fromIndex;
+//     }
+//     for(let i =start; i< this.length; i++) {
+//         if(this[i] === searchElement) {
+//             index = i;
+//             break;
+//         }
+//     }
+//     return index;
+// };
+
+// //test
+// const beasts = ['ant', 'bison', 'camel', 'duck', 'bison'];
+
+// console.log(beasts.myIndexOf('bison'));
+// // expected output: 1
+
+// // start from index 2
+// console.log(beasts.myIndexOf('bison', 2));
+// // expected output: 4
+
+// console.log(beasts.myIndexOf('giraffe'));
+// // expected output: -1
+
 
 /*
 // PUSH //
@@ -154,12 +207,37 @@ arr.myPush(4,5,6);
 console.log(arr);
 */
 
-/*
 // LASTINDEXOF //
-Array.prototype.myLastIndexOf = function() {
-
+Array.prototype.myLastIndexOf = function(searchElement, fromIndex) {
+    let index = -1;
+    let start = this.length -1; 
+    if(fromIndex >= this.length) {
+        start = this.length -1;
+    }
+    if(fromIndex < 0) { //not sure about offset
+        start = this.length + fromIndex;
+        if(start < 0) {
+            return index;
+        }
+    }
+    for(let i = start; i >= 0; i--) {
+        if(this[i] === searchElement) {
+            index = i;
+            break;
+        }
+    }
+    return index;
 };
 
+const animals = ['Dodo', 'Tiger', 'Penguin', 'Dodo'];
+
+console.log(animals.myLastIndexOf('Dodo'));
+// expected output: 3
+
+console.log(animals.myLastIndexOf('Tiger'));
+// expected output: 1
+
+/*
 // KEYS //
 Object.grabKeys = function() {
 
