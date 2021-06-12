@@ -207,44 +207,113 @@ arr.myPush(4,5,6);
 console.log(arr);
 */
 
-// LASTINDEXOF //
-Array.prototype.myLastIndexOf = function(searchElement, fromIndex) {
-    let index = -1;
-    let start = this.length -1; 
-    if(fromIndex >= this.length) {
-        start = this.length -1;
-    }
-    if(fromIndex < 0) { //not sure about offset
-        start = this.length + fromIndex;
-        if(start < 0) {
-            return index;
-        }
-    }
-    for(let i = start; i >= 0; i--) {
-        if(this[i] === searchElement) {
-            index = i;
-            break;
-        }
-    }
-    return index;
-};
+// LASTINDEXOF //  --> test more
+// Array.prototype.myLastIndexOf = function(searchElement, fromIndex) {
+//     let index = -1;
+//     let start = this.length -1; 
+//     if(fromIndex >= this.length) {
+//         start = this.length -1;
+//     }
+//     if(fromIndex < 0) { //not sure about offset
+//         start = this.length + fromIndex;
+//         if(start < 0) {
+//             return index;
+//         }
+//     }
+//     for(let i = start; i >= 0; i--) {
+//         if(this[i] === searchElement) {
+//             index = i;
+//             break;
+//         }
+//     }
+//     return index;
+// };
 
-const animals = ['Dodo', 'Tiger', 'Penguin', 'Dodo'];
+// const animals = ['Dodo', 'Tiger', 'Penguin', 'Dodo'];
 
-console.log(animals.myLastIndexOf('Dodo'));
-// expected output: 3
+// console.log(animals.myLastIndexOf('Dodo'));
+// // expected output: 3
 
-console.log(animals.myLastIndexOf('Tiger'));
+// console.log(animals.myLastIndexOf('Tiger'));
 // expected output: 1
 
 /*
-// KEYS //
-Object.grabKeys = function() {
-
+// KEYS // --> test more
+Object.grabKeys = function(obj) {
+    let new_array = [];
+    for(let i in obj) {
+        new_array.push(i);
+    }
+    return new_array;
 };
 
-// VALUES //
-Object.grabValues = function() {
+const object1 = {
+    a: 'somestring',
+    b: 42,
+    c: false
+  };
+  
+  console.log(Object.grabKeys(object1));
+  // expected output: Array ["a", "b", "c"]
 
-};
+  // simple array
+const arr = ['a', 'b', 'c'];
+console.log(Object.grabKeys(arr)); // console: ['0', '1', '2']
+
+// array-like object
+const obj = { 0: 'a', 1: 'b', 2: 'c' };
+console.log(Object.grabKeys(obj)); // console: ['0', '1', '2']
+
+// array-like object with random key ordering
+const anObj = { 100: 'a', 2: 'b', 7: 'c' };
+console.log(Object.grabKeys(anObj)); // console: ['2', '7', '100']
+
+// getFoo is a property which isn't enumerable
+const myObj = Object.create({}, {
+  getFoo: {
+    value: function () { return this.foo; }
+  }
+});
+myObj.foo = 1;
+console.log(Object.grabKeys(myObj)); // console: ['foo']
+
 */
+
+// VALUES // --> test more
+Object.grabValues = function(obj) {
+    let new_array = [];
+    for(let i in obj) {
+        new_array.push(obj[i]);
+    }
+    return new_array;
+};
+
+const object1 = {
+    a: 'somestring',
+    b: 42,
+    c: false
+  };
+  
+  console.log(Object.grabValues(object1));
+  // expected output: Array ["somestring", 42, false]
+  const obj = { foo: 'bar', baz: 42 };
+console.log(Object.grabValues(obj)); // ['bar', 42]
+
+// Array-like object
+const arrayLikeObj1 = { 0: 'a', 1: 'b', 2: 'c' };
+console.log(Object.grabValues(arrayLikeObj1 )); // ['a', 'b', 'c']
+
+// Array-like object with random key ordering
+// When using numeric keys, the values are returned in the keys' numerical order
+const arrayLikeObj2 = { 100: 'a', 2: 'b', 7: 'c' };
+console.log(Object.grabValues(arrayLikeObj2 )); // ['b', 'c', 'a']
+
+// getFoo is property which isn't enumerable
+const my_obj = Object.create({}, { getFoo: { value: function() { return this.foo; } } });
+my_obj.foo = 'bar';
+console.log(Object.grabValues(my_obj)); // ['bar']
+
+// non-object argument will be coerced to an object
+console.log(Object.grabValues('foo')); // ['f', 'o', 'o']
+
+  
